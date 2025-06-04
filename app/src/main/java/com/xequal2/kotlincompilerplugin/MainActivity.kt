@@ -17,6 +17,7 @@ import com.xequal2.kotlincompilerplugin.ui.theme.KotlinCompilerPluginTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        testFunction()
         enableEdgeToEdge()
         setContent {
             KotlinCompilerPluginTheme {
@@ -30,10 +31,12 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+fun testFunction() { /* should print */ }
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     Log.d("TAG", "Hello")
+    println("TAG Hello")
     Text(
         text = "Hello $name!",
         modifier = modifier

@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.compose)
+  //  alias(libs.plugins.kotlin.compose)
 }
 
 android {
@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId = "com.xequal2.kotlincompilerplugin"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
@@ -34,15 +34,32 @@ android {
     kotlinOptions {
         jvmTarget = "11"
         val pluginJar = project(":logcomposableplugin").layout.buildDirectory.file("libs/logcomposableplugin.jar")
-        freeCompilerArgs += listOf("-Xplugin=${pluginJar.get().asFile.absolutePath}")
+        freeCompilerArgs += listOf("-Xplugin=${project(":logcomposableplugin").layout.buildDirectory.file("libs/logcomposableplugin.jar").get().asFile.absolutePath}")
     }
     buildFeatures {
         compose = true
     }
+    packagingOptions {
+        exclude("kotlin/internal/internal.kotlin_builtins")
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.11" // or newer
+    }
+    configurations.all {
+        resolutionStrategy.eachDependency {
+            if (requested.group == "org.jetbrains.kotlin") {
+                useVersion("1.9.23") // Change to match your plugin/compiler version
+                because("Kotlin plugin, stdlib, and embeddable compiler MUST match!")
+            }
+        }
+    }
+    packagingOptions {
+        exclude("**/*.kotlin_builtins")
+    }
 }
 
 dependencies {
-
+  //  implementation("org.jetbrains.kotlin:kotlin-stdlib:1.9.23")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
