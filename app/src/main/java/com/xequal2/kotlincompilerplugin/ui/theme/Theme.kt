@@ -2,6 +2,7 @@ package com.xequal2.kotlincompilerplugin.ui.theme
 
 import android.app.Activity
 import android.os.Build
+import android.util.Log
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
@@ -40,6 +41,7 @@ fun KotlinCompilerPluginTheme(
     dynamicColor: Boolean = true,
     content: @Composable () -> Unit
 ) {
+    Log.d("TAG", "Hello")
     val colorScheme = when {
         dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
             val context = LocalContext.current

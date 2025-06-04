@@ -1,6 +1,7 @@
 package com.xequal2.kotlincompilerplugin
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -16,6 +17,7 @@ import com.xequal2.kotlincompilerplugin.ui.theme.KotlinCompilerPluginTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        testFunction()
         enableEdgeToEdge()
         setContent {
             KotlinCompilerPluginTheme {
@@ -29,9 +31,12 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+fun testFunction() { /* should print */ }
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
+    Log.d("TAG", "Hello")
+    println("TAG Hello")
     Text(
         text = "Hello $name!",
         modifier = modifier
@@ -41,6 +46,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
+    Log.d("TAG", "Hello")
     KotlinCompilerPluginTheme {
         Greeting("Android")
     }
