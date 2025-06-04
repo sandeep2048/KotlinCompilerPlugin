@@ -33,6 +33,8 @@ android {
     }
     kotlinOptions {
         jvmTarget = "11"
+        val pluginJar = project(":logcomposableplugin").layout.buildDirectory.file("libs/logcomposableplugin.jar")
+        freeCompilerArgs += listOf("-Xplugin=${pluginJar.get().asFile.absolutePath}")
     }
     buildFeatures {
         compose = true
@@ -56,4 +58,5 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+    implementation(project(":logcomposableplugin"))
 }
