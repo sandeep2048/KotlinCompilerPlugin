@@ -21,4 +21,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "KotlinCompilerPlugin"
 include(":app")
+include(":logcomposableplugin")
  
